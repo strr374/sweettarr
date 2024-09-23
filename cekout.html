@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #b4a4a4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+             
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 200px;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn{
+       display: inline-block;
+       background: #999;
+        color: #fff;
+         padding: 8px 30px;
+        margin: 30px 0;
+        border-radius:30px ;
+          transition: background 0.5s;
+          
+}
+      .btn:hover{
+       background: #563434;
+}
+.btn a{
+    color: black;
+    text-decoration: none;
+}
+        
+        .success-message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2> Checkout</h2>
+    <form id="checkoutForm">
+        <div class="form-group">
+            <label for="nama">Nama Penerima:</label>
+            <input type="text" id="nama" name="nama_penerima" required>
+        </div>
+        <div class="form-group">
+            <label for="telepon">Nomor Telepon:</label>
+            <input type="tel" id="telepon" name="nomor_telepon" required>
+        </div>
+        <div class="form-group">
+            <label for="alamat">Alamat Pengiriman:</label>
+            <textarea id="alamat" name="alamat_pengiriman" rows="4" required></textarea>
+        </div>
+        <button type="submit"  class="btn"><a href="akhir.html">Checkout</a> </button>
+    </form>
+    </div>
+
+<script>
+    // Mendapatkan elemen form dan success message
+    const form = document.getElementById('checkoutForm');
+    const successMessage = document.getElementById('successMessage');
+
+    // Menangani pengiriman form
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Mencegah pengiriman form
+
+        // Mendapatkan nilai input
+        const namaPenerima = document.getElementById('nama').value;
+        const nomorTelepon = document.getElementById('telepon').value;
+        const alamatPengiriman = document.getElementById('alamat').value;
+
+        // Validasi nomor telepon (hanya angka, 10-15 digit)
+        const teleponRegex = /^[0-9]{10,15}$/;
+        if (!teleponRegex.test(nomorTelepon)) {
+            alert('Masukkan nomor telepon yang valid (10-15 digit).');
+            return;
+        }
+
+        // Menampilkan pesan sukses
+        successMessage.style.display = 'block';
+
+        // (Opsional) Lakukan sesuatu dengan data, misalnya kirim ke server menggunakan fetch() jika diperlukan
+        console.log({
+            namaPenerima,
+            nomorTelepon,
+            alamatPengiriman
+        });
+
+        // Mengosongkan form
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
